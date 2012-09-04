@@ -59,8 +59,7 @@ describe Worker do
 
   it "Статус поиска работы" do
     @worker.search_status = nil
-    @worker.should_not be_valid
-    @worker.errors[:search_status].should_not be_empty
+    @worker.should be_valid
   end
 
   it "Желаемая зарплата" do

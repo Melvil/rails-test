@@ -9,7 +9,7 @@ class Worker < ActiveRecord::Base
 
   validates :name, :presence => true, :format => {:with => /^[а-яА-ЯёЁ]+\s+[а-яА-ЯёЁ]+\s+[а-яА-ЯёЁ]+$/}
   validates :contacts, :presence => true, :if => :validate_cotacts_email_or_phone?
-  validates :search_status, :presence => true
+#  validates :search_status
   validates :desired_salary, :presence => true
 
 

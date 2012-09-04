@@ -13,7 +13,6 @@
       <th><%= model_class.human_attribute_name(:salary) %></th>
       <th><%= model_class.human_attribute_name(:contacts) %></th>
       <th><%= model_class.human_attribute_name(:abilities_count) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -28,8 +27,9 @@
         <td><%= vacancy.salary %></td>
         <td><%= vacancy.contacts %></td>
         <td><%= vacancy.abilities_count %></td>
-        <td><%=l vacancy.created_at %></td>
         <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      vacancy_path(vacancy), :class => 'btn btn-mini' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_vacancy_path(vacancy), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

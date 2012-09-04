@@ -8,7 +8,7 @@
   <div class="control-group">
     <%= f.label :contacts, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :contacts, :class => 'text_area' %>
+      <%= f.text_area :contacts, :class => 'text_area', :rows => 5 %>
     </div>
   </div>
   <div class="control-group">
@@ -21,12 +21,6 @@
     <%= f.label :desired_salary, :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :desired_salary, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :abilities_count, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :abilities_count, :class => 'number_field' %>
     </div>
   </div>
 

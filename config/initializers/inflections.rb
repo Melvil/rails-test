@@ -13,3 +13,5 @@
 # ActiveSupport::Inflector.inflections do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+Time::DATE_FORMATS[:default] = "%d.%m.%Y"

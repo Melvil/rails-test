@@ -11,7 +11,6 @@
       <th><%= model_class.human_attribute_name(:search_status) %></th>
       <th><%= model_class.human_attribute_name(:desired_salary) %></th>
       <th><%= model_class.human_attribute_name(:abilities_count) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -24,8 +23,9 @@
         <td><%= worker.search_status %></td>
         <td><%= worker.desired_salary %></td>
         <td><%= worker.abilities_count %></td>
-        <td><%=l worker.created_at %></td>
         <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      worker_path(worker), :class => 'btn btn-mini' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_worker_path(worker), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
