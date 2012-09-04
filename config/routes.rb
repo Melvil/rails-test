@@ -1,4 +1,6 @@
 Job::Application.routes.draw do
+  resources :workers
+
   resources :vacancies
 
   resources :abilities

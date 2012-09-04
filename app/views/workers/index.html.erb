@@ -1,0 +1,29 @@
+<h1>Listing workers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Contacts</th>
+    <th>Search status</th>
+    <th>Desired salary</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @workers.each do |worker| %>
+  <tr>
+    <td><%= worker.name %></td>
+    <td><%= worker.contacts %></td>
+    <td><%= worker.search_status %></td>
+    <td><%= worker.desired_salary %></td>
+    <td><%= link_to 'Show', worker %></td>
+    <td><%= link_to 'Edit', edit_worker_path(worker) %></td>
+    <td><%= link_to 'Destroy', worker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Worker', new_worker_path %>
