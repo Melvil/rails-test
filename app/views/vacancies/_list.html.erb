@@ -1,0 +1,41 @@
+<%- model_class = Vacancy -%>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:date_create) %></th>
+      <th><%= model_class.human_attribute_name(:date_end) %></th>
+      <th><%= model_class.human_attribute_name(:duration) %></th>
+      <th><%= model_class.human_attribute_name(:salary) %></th>
+      <th><%= model_class.human_attribute_name(:contacts) %></th>
+      <th><%= model_class.human_attribute_name(:abilities_count) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vacancies.each do |vacancy| %>
+      <tr>
+        <td><%= link_to vacancy.id, vacancy_path(vacancy) %></td>
+        <td><%= vacancy.title %></td>
+        <td><%= vacancy.date_create %></td>
+        <td><%= vacancy.date_end %></td>
+        <td><%= vacancy.duration %></td>
+        <td><%= vacancy.salary %></td>
+        <td><%= vacancy.contacts %></td>
+        <td><%= vacancy.abilities_count %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      vacancy_path(vacancy), :class => 'btn btn-mini' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_vacancy_path(vacancy), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      vacancy_path(vacancy),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
