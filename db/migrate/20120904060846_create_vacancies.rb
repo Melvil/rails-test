@@ -3,9 +3,11 @@ class CreateVacancies < ActiveRecord::Migration
     create_table :vacancies do |t|
       t.string :title
       t.datetime :date_create
+      t.datetime :date_end
       t.integer :duration
       t.integer :salary
       t.text :contacts
+      t.integer :abilities_count
 
       t.timestamps
     end
