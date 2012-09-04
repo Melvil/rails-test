@@ -1,0 +1,8 @@
+$('#AbilityList').append(
+  '<li id="Ability-<%= @ability.id %>">'+
+  '<b><%= @ability.name %></b> '+
+  '<%= link_to 'Delete', {:action => :ability_delete, :ability_id => @ability.id}, :method => :delete, :remote => true %>'+
+  '</li>'
+);
+
+$('#AbilitySelect_id option').filter(function() { return this.value == <%= @ability.id %> }).remove();

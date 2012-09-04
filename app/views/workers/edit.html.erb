@@ -4,3 +4,10 @@
                                    :default => "Edit #{model_class.model_name.human}") %></h1>
 </div>
 <%= render :partial => 'form' %>
+
+<br />
+
+<% @rel = @worker %>
+<%= render "abilities/edit_abilities_rel" %>
+
+<br />

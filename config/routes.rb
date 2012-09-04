@@ -1,9 +1,19 @@
 Job::Application.routes.draw do
-  resources :workers
-
-  resources :vacancies
-
   resources :abilities
+
+  resources :vacancies do
+    member do
+      post 'ability_add'
+      match 'ability_delete/:ability_id' => 'vacancies#ability_delete'
+    end
+  end
+
+  resources :workers do
+    member do
+      post 'ability_add'
+      match 'ability_delete/:ability_id' => 'workers#ability_delete'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

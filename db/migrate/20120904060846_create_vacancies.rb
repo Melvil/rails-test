@@ -7,7 +7,7 @@ class CreateVacancies < ActiveRecord::Migration
       t.integer :duration
       t.integer :salary
       t.text :contacts
-      t.integer :abilities_count
+      t.integer :abilities_count, :null => false, :default => 0
 
       t.timestamps
     end

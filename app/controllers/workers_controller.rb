@@ -80,4 +80,51 @@ class WorkersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def ability_add
+    @worker = Worker.find(params[:id])
+
+    if (params['AbilitySelect']['id'])
+      @ability = Ability.find(params['AbilitySelect']['id'])
+    else
+      if (params['AbilitySelect']['name'])
+        @ability = Ability.find_by_name(params['AbilitySelect']['name'])
+        if !@ability
+          @ability = Ability.new(:name => params['AbilitySelect']['name'])
+          @ability.save
+        end
+      else
+        @ability = nil
+      end
+    end
+
+    respond_to do |format|
+      if @worker.abilities << @ability
+        format.html { redirect_to action: "show" }
+        format.json { render json: @ability, status: :success }
+        format.js { render "abilities/add_rel" }
+      else
+        format.html { redirect_to action: "show" }
+        format.json { render json: @ability, status: :error }
+        format.js { render :nothing => true }
+      end
+    end
+  end
+
+  def ability_delete
+    @worker = Worker.find(params[:id])
+    @ability = Ability.find(params[:ability_id])
+
+    respond_to do |format|
+      if @worker.abilities.delete(@ability)
+        format.html { redirect_to action: "show" }
+        format.json { render json: @ability, status: :success }
+        format.js { render "abilities/delete_rel" }
+      else
+        format.html { redirect_to action: "show" }
+        format.json { render json: @ability, status: :error }
+        format.js { render :nothing => true }
+      end
+    end
+  end
 end

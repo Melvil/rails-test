@@ -1,0 +1,12 @@
+$('#Ability-<%= @ability.id %>').remove();
+
+var el = $('<option value="<%= @ability.id %>"><%= @ability.name %></option>').appendTo('#AbilitySelect_id');
+
+$('#AbilitySelect_id option').each(function() {
+  if (this.text.localeCompare("<%= @ability.name %>") > 0)
+  {
+    $(this).before(el);
+    return false;
+  }
+  return true;
+});
