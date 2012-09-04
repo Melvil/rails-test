@@ -3,4 +3,7 @@ class WorkerAbility < ActiveRecord::Base
 
   belongs_to :worker
   belongs_to :ability
+
+  validates :worker_id, :presence => true, :uniqueness => {:scope => :ability_id}
+  validates :ability_id, :presence => true
 end

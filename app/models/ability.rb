@@ -6,4 +6,6 @@ class Ability < ActiveRecord::Base
 
   has_many :vacancy_abilities
   has_many :vacancies, :through => :vacancy_abilities
+
+  validates :name, :presence => true, :uniqueness => {:case_sensitive => false}
 end
