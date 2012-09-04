@@ -5,6 +5,7 @@ class Worker < ActiveRecord::Base
 
   has_many :worker_abilities
   has_many :abilities, :through => :worker_abilities, :uniq => true, :order => {:worker_abilities => :id}
+  has_many :vacancy_abilities, :through => :abilities
 
   validates :name, :presence => true, :format => {:with => /^[а-яА-ЯёЁ]+\s+[а-яА-ЯёЁ]+\s+[а-яА-ЯёЁ]+$/}
   validates :contacts, :presence => true, :if => :validate_cotacts_email_or_phone?
@@ -19,5 +20,23 @@ class Worker < ActiveRecord::Base
     )
       errors.add(:contacts, 'Need phone or email')
     end
+  end
+
+
+  def vacancies
+    Vacancy.for_worker(id)
+  end
+
+# Поиск работников для вакансии:
+#    Работник должен искать работу
+#    (+)Вывести работников в двух группах которые полностью подходят по набору умений и частично.
+#    Дополнительно все вакансии должны быть отсортированы по возрастанию заработной платы предлагаемой и желаемой работником
+  def self.for_vacancy(vacancy_id)
+    select('workers.*, COUNT(vacancy_abilities.ability_id) as worker_abilities_count').
+    joins(:vacancy_abilities).
+    where({:vacancy_abilities => {:vacancy_id => vacancy_id}}).
+    group(:id).
+    where(:search_status => true).
+    order(:desired_salary)
   end
 end
