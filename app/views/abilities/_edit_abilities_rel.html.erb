@@ -6,20 +6,20 @@
   <% @rel.abilities.each do |ability| %>
     <li id="Ability-<%= ability.id %>">
       <b><%= ability.name %></b>
-      <%= link_to 'Delete', {:action => :ability_delete, :ability_id => ability.id}, :method => :delete, :remote => true %>
+      <%= link_to 'Delete', {:action => :ability_delete, :id => @rel, :ability_id => ability}, :method => :delete, :remote => true %>
     </li>
   <% end %>
   </ul>
 
   <p>
-    <%= form_tag({:action => :ability_add}, :remote => true) do %>
+    <%= form_tag({:action => :ability_add, :id => @rel}, :remote => true) do %>
       <%= select('AbilitySelect', :id, (Ability.order(:name).all - @rel.abilities).collect {|p| [p.name, p.id]}) %>
       <%= submit_tag('Add') %>
     <% end %>
   </p>
 
   <p>
-    <%= form_tag({:action => :ability_add}, :remote => true) do %>
+    <%= form_tag({:action => :ability_add, :id => @rel}, :remote => true) do %>
       <%= text_field('AbilitySelect', :name) %>
       <%= submit_tag('Add new') %>
     <% end %>
