@@ -1,4 +1,6 @@
 Job::Application.routes.draw do
+  resources :vacancies
+
   resources :abilities
 
   # The priority is based upon order of creation:
