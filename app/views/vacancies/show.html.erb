@@ -16,6 +16,8 @@
   <dd><%= @vacancy.salary %></dd>
   <dt><strong><%= model_class.human_attribute_name(:contacts) %>:</strong></dt>
   <dd><%= @vacancy.contacts %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:abilities) %>:</strong></dt>
+  <dd><%= @vacancy.abilities.collect{|a| a.name}.join(', ') %></dd>
 </dl>
 
 <div class="form-actions">
@@ -29,3 +31,43 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 </div>
+
+<h2>Suitable workers</h2>
+
+<% if @vacancy.workers %>
+<%
+  @workers_fully = []
+  @workers_other = []
+  @vacancy.workers.each do |worker|
+    if worker.abilities_count > worker.worker_abilities_count.to_i
+      @workers_other << worker
+    else
+      @workers_fully << worker
+    end
+  end
+%>
+<table width="400">
+<tr>
+  <th>Fully suitable</b>
+  <th>Partially suitable</b>
+</tr>
+<tr>
+  <td>
+    <ul>
+    <% @workers_fully.each do |worker| %>
+      <li><%= link_to worker.name, worker %></li>
+    <% end %>
+    </ul>
+  </td>
+  <td>
+    <ul>
+    <% @workers_other.each do |worker| %>
+      <li><%= link_to worker.name, worker %> (<%= worker.worker_abilities_count %> of <%= worker.abilities_count %>)</li>
+    <% end %>
+    </ul>
+  </td>
+</tr>
+</table>
+<% else %>
+  <p>Empty</p>
+<% end %>

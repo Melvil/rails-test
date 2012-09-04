@@ -32,11 +32,22 @@ class Worker < ActiveRecord::Base
 #    (+)Вывести работников в двух группах которые полностью подходят по набору умений и частично.
 #    Дополнительно все вакансии должны быть отсортированы по возрастанию заработной платы предлагаемой и желаемой работником
   def self.for_vacancy(vacancy_id)
-    select('workers.*, COUNT(vacancy_abilities.ability_id) as worker_abilities_count').
-    joins(:vacancy_abilities).
-    where({:vacancy_abilities => {:vacancy_id => vacancy_id}}).
-    group(:id).
+    select('workers.*, vv.worker_abilities_count').
+    joins("INNER JOIN (
+SELECT worker_abilities.worker_id, COUNT(worker_abilities.ability_id) as worker_abilities_count 
+FROM vacancy_abilities
+  INNER JOIN worker_abilities ON vacancy_abilities.ability_id = worker_abilities.ability_id
+    AND vacancy_abilities.vacancy_id = #{vacancy_id}
+GROUP BY worker_abilities.worker_id
+) as vv ON workers.id = vv.worker_id").
     where(:search_status => true).
     order(:desired_salary)
+
+    # select('workers.*, COUNT(vacancy_abilities.ability_id) as worker_abilities_count').
+    # joins(:vacancy_abilities).
+    # where({:vacancy_abilities => {:vacancy_id => vacancy_id}}).
+    # group(:id).
+    # where(:search_status => true).
+    # order(:desired_salary)
   end
 end
