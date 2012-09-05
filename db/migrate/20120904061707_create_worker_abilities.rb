@@ -6,5 +6,6 @@ class CreateWorkerAbilities < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :worker_abilities, [:worker_id, :ability_id], :unique => true
   end
 end

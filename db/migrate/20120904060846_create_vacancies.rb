@@ -11,5 +11,9 @@ class CreateVacancies < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :vacancies, :salary
+    add_index :vacancies, :date_create
+    add_index :vacancies, :date_end
+    add_index :vacancies, :abilities_count
   end
 end

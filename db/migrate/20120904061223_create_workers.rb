@@ -9,5 +9,9 @@ class CreateWorkers < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :workers, :name
+    add_index :workers, :search_status
+    add_index :workers, :desired_salary
+    add_index :workers, :abilities_count
   end
 end

@@ -6,5 +6,6 @@ class CreateVacancyAbilities < ActiveRecord::Migration
 
       t.timestamps
     end
+     add_index :vacancy_abilities, [:vacancy_id, :ability_id], :unique => true
   end
 end
