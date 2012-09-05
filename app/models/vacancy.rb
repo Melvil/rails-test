@@ -1,7 +1,7 @@
 class Vacancy < ActiveRecord::Base
   attr_accessible :contacts, :date_create, :date_end, :duration, :salary, :title
 
-  has_many :vacancy_abilities
+  has_many :vacancy_abilities, :dependent => :destroy
   has_many :abilities, :through => :vacancy_abilities, :uniq => true #, :order => {:vacancy_abilities => :id}
   has_many :worker_abilities, :through => :abilities
 
