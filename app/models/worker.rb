@@ -12,6 +12,8 @@ class Worker < ActiveRecord::Base
 #  validates :search_status
   validates :desired_salary, :presence => true
 
+  before_create :default_values
+
 
   def validate_cotacts_email_or_phone?
     if !(
@@ -22,6 +24,9 @@ class Worker < ActiveRecord::Base
     end
   end
 
+  def default_values
+    self.abilities_count = 0
+  end
 
   def vacancies
     Vacancy.for_worker(id)

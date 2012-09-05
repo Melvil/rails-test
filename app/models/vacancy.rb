@@ -11,8 +11,13 @@ class Vacancy < ActiveRecord::Base
   validates :salary, :presence => true, :numericality => true
   validates :contacts, :presence => true
 
+  before_create :default_values
   before_save :calculate_date_end
 
+
+  def default_values
+    self.abilities_count = 0
+  end
 
   def calculate_date_end
     self.date_end = date_create && duration ? date_create + duration.days : nil
