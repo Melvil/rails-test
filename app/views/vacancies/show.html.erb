@@ -39,7 +39,7 @@
   @workers_fully = []
   @workers_other = []
   @vacancy.workers.each do |worker|
-    if worker.abilities_count > worker.worker_abilities_count.to_i
+    if @vacancy.abilities_count > worker.worker_abilities_count.to_i
       @workers_other << worker
     else
       @workers_fully << worker
@@ -62,7 +62,7 @@
   <td>
     <ul>
     <% @workers_other.each do |worker| %>
-      <li><%= link_to worker.name, worker %> (<%= worker.worker_abilities_count %> of <%= worker.abilities_count %>)</li>
+      <li><%= link_to worker.name, worker %> (<%= worker.worker_abilities_count %> of <%= @vacancy.abilities_count %>)</li>
     <% end %>
     </ul>
   </td>
